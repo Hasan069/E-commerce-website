@@ -1,5 +1,6 @@
+import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={cn("relative h-full antialiased")}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="relative flex flex-col min-h-screen">
+            <div className="flex-grow flex-1">{children}</div>
+          </main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
